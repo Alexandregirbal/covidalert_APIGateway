@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
-
+//bin/zookeeper-server-start.sh config/zookeeper.properties
+//bin/kafka-server-start.sh config/server.properties
 @Service
 public class KafkaProducer {
 
@@ -26,38 +27,5 @@ public class KafkaProducer {
     public void sendMessage(Object message, String topicName) {
         kafkaTemplate.send(topicName, message);
     }
-    /**
-    @Bean
-    public ProducerFactory<String, Object>
-    producerFactory()
-    {
-        // Create a map of a string
-        // and object
-        Map<String, Object> config
-                = new HashMap<>();
-
-        config.put(
-                ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                "127.0.0.1:9092");
-
-        config.put(
-                ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
-                StringSerializer.class);
-
-        config.put(
-                ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-                JsonSerializer.class);
-
-        return new DefaultKafkaProducerFactory<>(config);
-    }
-
-    @Bean
-    public KafkaTemplate<String, Object>
-    kafkaTemplate()
-    {
-        return new KafkaTemplate<>(
-                producerFactory());
-    }
-    */
 
 }
