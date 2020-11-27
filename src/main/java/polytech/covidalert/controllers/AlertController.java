@@ -16,13 +16,14 @@ public class AlertController {
 
 
     @GetMapping(value = "", produces = "application/json")
-    public Object get(@RequestParam final String userEmail) throws IOException {
+    public Object get(@RequestParam final String userEmail, @RequestHeader("Authorization") String authorization) throws IOException {
         System.out.println(userEmail + " get or create user");
         HttpClient httpClient = HttpClientBuilder.create().build();
         Object response = null;
         try {
             HttpGet request = new HttpGet("http://localhost:8092/covidalert/api/send-warning?userEmail=" + userEmail);
             request.addHeader("content-type", "application/json");
+            request.addHeader("Authorization", authorization);
             HttpResponse res = httpClient.execute(request);
             String responseBody = EntityUtils.toString(res.getEntity(), StandardCharsets.UTF_8);
             response = responseBody;

@@ -24,7 +24,7 @@ import java.util.List;
 public class UserController {
 
     @PostMapping(value = "", produces = "application/json")
-    public Object getUser(@RequestBody final String body) throws IOException {
+    public Object getUser(@RequestBody final String body , @RequestHeader("Authorization") String authorization) throws IOException {
         System.out.println(body + " get or create user");
         HttpClient httpClient = HttpClientBuilder.create().build();
         Object response = null;
@@ -32,6 +32,7 @@ public class UserController {
             HttpPost request = new HttpPost("http://localhost:5000/covidalert/api/users");
             StringEntity params = new StringEntity(body);
             request.addHeader("content-type", "application/json");
+            request.addHeader("Authorization", authorization);
             request.setEntity(params);
             HttpResponse res = httpClient.execute(request);
             String responseBody = EntityUtils.toString(res.getEntity(), StandardCharsets.UTF_8);
@@ -43,7 +44,7 @@ public class UserController {
     }
 
     @RequestMapping(value="{email}",method = RequestMethod.PUT)
-    public Object putUser(@RequestBody final String body, @RequestParam final String userEmail) throws IOException {
+    public Object putUser(@RequestBody final String body, @RequestParam final String userEmail , @RequestHeader("Authorization") String authorization) throws IOException {
         System.out.println(body + " update user");
         HttpClient httpClient = HttpClientBuilder.create().build();
         Object response = null;
@@ -51,6 +52,7 @@ public class UserController {
             HttpPut request = new HttpPut("http://localhost:5000/covidalert/api/users?email=" + userEmail);
             StringEntity params = new StringEntity(body);
             request.addHeader("content-type", "application/json");
+            request.addHeader("Authorization", authorization);
             request.setEntity(params);
             HttpResponse res = httpClient.execute(request);
             String responseBody = EntityUtils.toString(res.getEntity(), StandardCharsets.UTF_8);
