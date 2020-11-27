@@ -35,7 +35,7 @@ keycloak:
   resource : api
   public-client: false
   credentials:
-    secret : d1f29e18-54dd-402d-b990-203f776d8778
+    secret : 1a0b2b6e-caf5-4640-be59-06938459b5df
   bearer-only: true
   security-constraints[0]:
     security-collections[0]:

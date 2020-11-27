@@ -5,7 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import polytech.covidalert.kafka.KafkaLocation;
 import polytech.covidalert.kafka.KafkaProducer;
-import polytech.covidalert.models.Location;
+
 
 import javax.servlet.http.HttpServletRequest;
 
